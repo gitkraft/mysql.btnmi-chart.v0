@@ -1,6 +1,6 @@
 ## Global Docker image parameters
 ## Please, note that this will override the image parameters, including dependencies, configured to use the global value
-## Current available global Docker image parameters: imageRegistry and imagepullSecrets
+## Current available global Docker image parameters: imageRegistry and imagePullSecrets
 ##
 # global:
 #   imageRegistry: myRegistryName
@@ -254,6 +254,12 @@ metrics:
     repository: prom/mysqld-exporter
     tag: v0.10.0
     pullPolicy: IfNotPresent
+    ## Optionally specify an array of imagePullSecrets.
+    ## Secrets must be manually created in the namespace.
+    ## ref: https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+    ##
+    # pullSecrets:
+    #   - myRegistryKeySecretName
   resources: {}
   annotations:
     prometheus.io/scrape: "true"
