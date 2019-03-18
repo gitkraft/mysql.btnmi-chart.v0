@@ -17,7 +17,10 @@ spec:
   serviceName: "{{ template "mysql.master.fullname" . }}"
   replicas: 1
   updateStrategy:
-    type: RollingUpdate
+    type: {{ .Values.master.updateStrategy.type }}
+    {{- if (eq "Recreate" .Values.master.updateStrategy.type) }}
+    rollingUpdate: null
+    {{- end }}
   template:
     metadata:
       labels:
@@ -138,7 +141,7 @@ spec:
         {{- end }}
       {{- if .Values.metrics.enabled }}
       - name: metrics
-        image: {{ template "metrics.image" . }}
+        image: {{ template "mysql.metrics.image" . }}
         imagePullPolicy: {{ .Values.metrics.image.pullPolicy | quote }}
         env:
         - name: MYSQL_ROOT_PASSWORD
