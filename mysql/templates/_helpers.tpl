@@ -167,20 +167,34 @@ Also, we can't use a single if because lazy evaluation is not an option
 Return  the proper Storage Class for the master
 */}}
 {{- define "mysql.master.storageClass" -}}
-{{- $storageClass := "" }}
+{{/*
+Helm 2.11 supports the assignment of a value to a variable defined in a different scope,
+but Helm 2.9 and 2.10 does not support it, so we need to implement this if-else logic.
+*/}}
 {{- if .Values.global -}}
     {{- if .Values.global.storageClass -}}
-        {{- $storageClass = .Values.global.storageClass -}}
-    {{- else if .Values.master.persistence.storageClass -}}
-        {{- $storageClass = .Values.master.persistence.storageClass -}}
+        {{- if (eq "-" .Values.global.storageClass) -}}
+            {{- printf "\"\"" -}}
+        {{- else }}
+            {{- printf "%s" .Values.global.storageClass -}}
+        {{- end -}}
+    {{- else -}}
+        {{- if .Values.master.persistence.storageClass -}}
+              {{- if (eq "-" .Values.master.persistence.storageClass) -}}
+                  {{- printf "\"\"" -}}
+              {{- else }}
+                  {{- printf "%s" .Values.master.persistence.storageClass -}}
+              {{- end -}}
+        {{- end -}}
     {{- end -}}
-{{- else if .Values.master.persistence.storageClass -}}
-    {{- $storageClass = .Values.master.persistence.storageClass -}}
-{{- end -}}
-{{- if (eq "-" $storageClass) -}}
-    {{- printf "\"\"" -}}
-{{- else }}
-    {{- printf "%s" $storageClass -}}
+{{- else -}}
+    {{- if .Values.master.persistence.storageClass -}}
+        {{- if (eq "-" .Values.master.persistence.storageClass) -}}
+            {{- printf "\"\"" -}}
+        {{- else }}
+            {{- printf "%s" .Values.master.persistence.storageClass -}}
+        {{- end -}}
+    {{- end -}}
 {{- end -}}
 {{- end -}}
 
@@ -188,19 +202,33 @@ Return  the proper Storage Class for the master
 Return  the proper Storage Class for the slave
 */}}
 {{- define "mysql.slave.storageClass" -}}
-{{- $storageClass := "" }}
+{{/*
+Helm 2.11 supports the assignment of a value to a variable defined in a different scope,
+but Helm 2.9 and 2.10 does not support it, so we need to implement this if-else logic.
+*/}}
 {{- if .Values.global -}}
     {{- if .Values.global.storageClass -}}
-        {{- $storageClass = .Values.global.storageClass -}}
-    {{- else if .Values.slave.persistence.storageClass -}}
-        {{- $storageClass = .Values.slave.persistence.storageClass -}}
+        {{- if (eq "-" .Values.global.storageClass) -}}
+            {{- printf "\"\"" -}}
+        {{- else }}
+            {{- printf "%s" .Values.global.storageClass -}}
+        {{- end -}}
+    {{- else -}}
+        {{- if .Values.slave.persistence.storageClass -}}
+              {{- if (eq "-" .Values.slave.persistence.storageClass) -}}
+                  {{- printf "\"\"" -}}
+              {{- else }}
+                  {{- printf "%s" .Values.slave.persistence.storageClass -}}
+              {{- end -}}
+        {{- end -}}
     {{- end -}}
-{{- else if .Values.slave.persistence.storageClass -}}
-    {{- $storageClass = .Values.slave.persistence.storageClass -}}
-{{- end -}}
-{{- if (eq "-" $storageClass) -}}
-    {{- printf "\"\"" -}}
-{{- else }}
-    {{- printf "%s" $storageClass -}}
+{{- else -}}
+    {{- if .Values.slave.persistence.storageClass -}}
+        {{- if (eq "-" .Values.slave.persistence.storageClass) -}}
+            {{- printf "\"\"" -}}
+        {{- else }}
+            {{- printf "%s" .Values.slave.persistence.storageClass -}}
+        {{- end -}}
+    {{- end -}}
 {{- end -}}
 {{- end -}}
