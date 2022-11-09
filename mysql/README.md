@@ -7,7 +7,7 @@ MySQL is a fast, reliable, scalable, and easy to use open source relational data
 [Overview of MySQL](http://www.mysql.com)
 
 Trademarks: This software listing is packaged by Bitnami. The respective trademarks mentioned in the offering are owned by the respective companies, and use of them does not imply any affiliation or endorsement.
-                           
+
 ## TL;DR
 
 ```bash
@@ -164,6 +164,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `primary.extraEnvVarsSecret`                    | Name of existing Secret containing extra env vars for MySQL primary containers                                  | `""`                |
 | `primary.persistence.enabled`                   | Enable persistence on MySQL primary replicas using a `PersistentVolumeClaim`. If false, use emptyDir            | `true`              |
 | `primary.persistence.existingClaim`             | Name of an existing `PersistentVolumeClaim` for MySQL primary replicas                                          | `""`                |
+| `primary.persistence.subPath`                   | The name of a volume's sub path to mount for persistence                                                        | `""`                |
 | `primary.persistence.storageClass`              | MySQL primary persistent volume storage Class                                                                   | `""`                |
 | `primary.persistence.annotations`               | MySQL primary persistent volume claim annotations                                                               | `{}`                |
 | `primary.persistence.accessModes`               | MySQL primary persistent volume access Modes                                                                    | `["ReadWriteOnce"]` |
@@ -251,6 +252,8 @@ The command removes all the Kubernetes components associated with the chart and 
 | `secondary.extraEnvVarsCM`                        | Name of existing ConfigMap containing extra env vars for MySQL secondary containers                                 | `""`                |
 | `secondary.extraEnvVarsSecret`                    | Name of existing Secret containing extra env vars for MySQL secondary containers                                    | `""`                |
 | `secondary.persistence.enabled`                   | Enable persistence on MySQL secondary replicas using a `PersistentVolumeClaim`                                      | `true`              |
+| `secondary.persistence.existingClaim`             | Name of an existing `PersistentVolumeClaim` for MySQL secondary replicas                                            | `""`                |
+| `secondary.persistence.subPath`                   | The name of a volume's sub path to mount for persistence                                                            | `""`                |
 | `secondary.persistence.storageClass`              | MySQL secondary persistent volume storage Class                                                                     | `""`                |
 | `secondary.persistence.annotations`               | MySQL secondary persistent volume claim annotations                                                                 | `{}`                |
 | `secondary.persistence.accessModes`               | MySQL secondary persistent volume access Modes                                                                      | `["ReadWriteOnce"]` |
@@ -457,7 +460,7 @@ This label will be displayed in the output of a successful install.
 
 This chart allows you to set your custom affinity using the `XXX.affinity` parameter(s). Find more information about Pod affinity in the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#affinity-and-anti-affinity).
 
-As an alternative, you can use the preset configurations for pod affinity, pod anti-affinity, and node affinity available at the [bitnami/common](https://github.com/bitnami/charts/tree/master/bitnami/common#affinities) chart. To do so, set the `XXX.podAffinityPreset`, `XXX.podAntiAffinityPreset`, or `XXX.nodeAffinityPreset` parameters.
+As an alternative, you can use the preset configurations for pod affinity, pod anti-affinity, and node affinity available at the [bitnami/common](https://github.com/bitnami/charts/tree/main/bitnami/common#affinities) chart. To do so, set the `XXX.podAffinityPreset`, `XXX.podAntiAffinityPreset`, or `XXX.nodeAffinityPreset` parameters.
 
 ## Troubleshooting
 
@@ -502,7 +505,7 @@ Affected values:
   - Credentials parameters are reorganized under the `auth` parameter.
   - `replication.enabled` parameter is deprecated in favor of `architecture` parameter that accepts two values: `standalone` and `replication`.
 - Chart labels were adapted to follow the [Helm charts standard labels](https://helm.sh/docs/chart_best_practices/labels/#standard-labels).
-- This version also introduces `bitnami/common`, a [library chart](https://helm.sh/docs/topics/library_charts/#helm) as a dependency. More documentation about this new utility could be found [here](https://github.com/bitnami/charts/tree/master/bitnami/common#bitnami-common-library-chart). Please, make sure that you have updated the chart dependencies before executing any upgrade.
+- This version also introduces `bitnami/common`, a [library chart](https://helm.sh/docs/topics/library_charts/#helm) as a dependency. More documentation about this new utility could be found [here](https://github.com/bitnami/charts/tree/main/bitnami/common#bitnami-common-library-chart). Please, make sure that you have updated the chart dependencies before executing any upgrade.
 
 Consequences:
 
