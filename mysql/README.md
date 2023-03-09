@@ -161,6 +161,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `primary.extraEnvVars`                          | Extra environment variables to be set on MySQL primary containers                                               | `[]`                |
 | `primary.extraEnvVarsCM`                        | Name of existing ConfigMap containing extra env vars for MySQL primary containers                               | `""`                |
 | `primary.extraEnvVarsSecret`                    | Name of existing Secret containing extra env vars for MySQL primary containers                                  | `""`                |
+| `primary.extraPorts`                            | Extra ports to expose                                                                                           | `[]`                |
 | `primary.persistence.enabled`                   | Enable persistence on MySQL primary replicas using a `PersistentVolumeClaim`. If false, use emptyDir            | `true`              |
 | `primary.persistence.existingClaim`             | Name of an existing `PersistentVolumeClaim` for MySQL primary replicas                                          | `""`                |
 | `primary.persistence.subPath`                   | The name of a volume's sub path to mount for persistence                                                        | `""`                |
@@ -250,6 +251,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `secondary.extraEnvVars`                          | An array to add extra environment variables on MySQL secondary containers                                           | `[]`                |
 | `secondary.extraEnvVarsCM`                        | Name of existing ConfigMap containing extra env vars for MySQL secondary containers                                 | `""`                |
 | `secondary.extraEnvVarsSecret`                    | Name of existing Secret containing extra env vars for MySQL secondary containers                                    | `""`                |
+| `secondary.extraPorts`                            | Extra ports to expose                                                                                               | `[]`                |
 | `secondary.persistence.enabled`                   | Enable persistence on MySQL secondary replicas using a `PersistentVolumeClaim`                                      | `true`              |
 | `secondary.persistence.existingClaim`             | Name of an existing `PersistentVolumeClaim` for MySQL secondary replicas                                            | `""`                |
 | `secondary.persistence.subPath`                   | The name of a volume's sub path to mount for persistence                                                            | `""`                |
@@ -356,7 +358,6 @@ The command removes all the Kubernetes components associated with the chart and 
 | `metrics.prometheusRule.namespace`           | Namespace for the prometheusRule Resource (defaults to the Release Namespace)                                                  | `""`                      |
 | `metrics.prometheusRule.additionalLabels`    | Additional labels that can be used so prometheusRule will be discovered by Prometheus                                          | `{}`                      |
 | `metrics.prometheusRule.rules`               | Prometheus Rule definitions                                                                                                    | `[]`                      |
-
 
 The above parameters map to the env variables defined in [bitnami/mysql](https://github.com/bitnami/containers/tree/main/bitnami/mysql). For more information please refer to the [bitnami/mysql](https://github.com/bitnami/containers/tree/main/bitnami/mysql) image documentation.
 
