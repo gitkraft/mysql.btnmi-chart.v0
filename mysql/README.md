@@ -306,7 +306,7 @@ The command removes all the Kubernetes components associated with the chart and 
 | `serviceAccount.create`                       | Enable the creation of a ServiceAccount for MySQL pods         | `true`  |
 | `serviceAccount.name`                         | Name of the created ServiceAccount                             | `""`    |
 | `serviceAccount.annotations`                  | Annotations for MySQL Service Account                          | `{}`    |
-| `serviceAccount.automountServiceAccountToken` | Automount service account token for the server service account | `true`  |
+| `serviceAccount.automountServiceAccountToken` | Automount service account token for the server service account | `false` |
 | `rbac.create`                                 | Whether to create & use RBAC resources or not                  | `false` |
 | `rbac.rules`                                  | Custom RBAC rules to set                                       | `[]`    |
 
@@ -406,7 +406,7 @@ helm install my-release -f values.yaml oci://REGISTRY_NAME/REPOSITORY_NAME/mysql
 
 ## Configuration and installation details
 
-### [Rolling VS Immutable tags](https://docs.bitnami.com/containers/how-to/understand-rolling-tags-containers/)
+### [Rolling VS Immutable tags](https://docs.bitnami.com/tutorials/understand-rolling-tags-containers)
 
 It is strongly recommended to use immutable tags in a production environment. This ensures your deployment does not change automatically if the same tag is updated with a different image.
 
@@ -560,7 +560,7 @@ kubectl delete statefulset mysql-slave --cascade=false
 
 ## License
 
-Copyright &copy; 2023 VMware, Inc.
+Copyright &copy; 2024 Broadcom. The term "Broadcom" refers to Broadcom Inc. and/or its subsidiaries.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
